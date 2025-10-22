@@ -25,9 +25,17 @@
         </div>
 
         <div class="mb-3">
-            <label>Jenis Cuti</label>
-            <input type="text" name="jenis_cuti" class="form-control" value="{{ old('jenis_cuti') }}" required>
-        </div>
+    <label for="jenis_cuti" class="form-label text-white">Jenis Cuti</label>
+    <select name="jenis_cuti" id="jenis_cuti" class="form-control" required>
+        <option value="">-- Pilih Jenis Cuti --</option>
+        <option value="Cuti Tahunan">Cuti Tahunan</option>
+        <option value="Cuti Sakit">Cuti Sakit</option>
+        <option value="Cuti Karena Alasan Penting">Cuti Karena Alasan Penting</option>
+        <option value="Cuti Besar">Cuti Besar</option>
+        <option value="Cuti Hamil">Cuti Hamil</option>
+        <option value="Cuti di Luar Tanggungan Negara">Cuti di Luar Tanggungan Negara</option>
+    </select>
+</div>
 
         <div class="mb-3">
             <label>Alasan</label>

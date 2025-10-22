@@ -23,7 +23,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($pegawai as $p)
+          @foreach($pegawais as $p)
           <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $p->nama }}</td>

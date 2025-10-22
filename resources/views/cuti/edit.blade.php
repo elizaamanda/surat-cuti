@@ -26,9 +26,17 @@
         </div>
 
         <div class="mb-3">
-            <label>Jenis Cuti</label>
-            <input type="text" name="jenis_cuti" class="form-control" value="{{ $cuti->jenis_cuti }}" required>
-        </div>
+        <label for="jenis_cuti" class="form-label">Jenis Cuti</label>
+        <select name="jenis_cuti" id="jenis_cuti" class="form-control" required>
+            <option value="">-- Pilih Jenis Cuti --</option>
+            <option value="Cuti Tahunan" {{ old('jenis_cuti', $cuti->jenis_cuti ?? '') == 'Cuti Tahunan' ? 'selected' : '' }}>Cuti Tahunan</option>
+            <option value="Cuti Sakit" {{ old('jenis_cuti', $cuti->jenis_cuti ?? '') == 'Cuti Sakit' ? 'selected' : '' }}>Cuti Sakit</option>
+            <option value="Cuti Karena Alasan Penting" {{ old('jenis_cuti', $cuti->jenis_cuti ?? '') == 'Cuti Karena Alasan Penting' ? 'selected' : '' }}>Cuti Karena Alasan Penting</option>
+            <option value="Cuti Besar" {{ old('jenis_cuti', $cuti->jenis_cuti ?? '') == 'Cuti Besar' ? 'selected' : '' }}>Cuti Besar</option>
+            <option value="Cuti Hamil" {{ old('jenis_cuti', $cuti->jenis_cuti ?? '') == 'Cuti Hamil' ? 'selected' : '' }}>Cuti Hamil</option>
+            <option value="Cuti di Luar Tanggungan Negara" {{ old('jenis_cuti', $cuti->jenis_cuti ?? '') == 'Cuti di Luar Tanggungan Negara' ? 'selected' : '' }}>Cuti di Luar Tanggungan Negara</option>
+        </select>
+    </div>
 
         <div class="mb-3">
             <label>Alasan</label>

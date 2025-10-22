@@ -8,23 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('pegawai', function (Blueprint $table) {
+        Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('nip')->unique();
-            $table->string('jabatan');
-            $table->string('pangkat');
-
-            // Tambahkan kolom untuk login
-            $table->string('username')->unique();
-            $table->string('password');
-
+            $table->string('pangkat')->nullable();
+            $table->string('jabatan')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('pegawai');
+        Schema::dropIfExists('pegawais');
     }
 };

@@ -3,26 +3,25 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
-    public function run(): void
+    public function run()
     {
-        $existingUser = DB::table('users')->where('username', 'admin')->first();
+        User::create([
+            'username' => 'admin1',
+            'nama' => 'Admin Satu',
+            'password' => Hash::make('12345'),
+            'role' => 'admin',
+        ]);
 
-        if (!$existingUser) {
-            DB::table('users')->insert([
-                'username' => 'admin',
-                'password' => Hash::make('123456'), // password di-hash
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-
-            $this->command->info('✅ User admin berhasil dibuat.');
-        } else {
-            $this->command->warn('⚠️ User admin sudah ada, tidak dibuat ulang.');
-        }
+        User::create([
+            'username' => 'pegawai1',
+            'nama' => 'Pegawai Satu',
+            'password' => Hash::make('12345'),
+            'role' => 'pegawai',
+        ]);
     }
 }

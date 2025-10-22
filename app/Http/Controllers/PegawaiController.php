@@ -7,65 +7,58 @@ use App\Models\Pegawai;
 
 class PegawaiController extends Controller
 {
-    // ✅ Menampilkan daftar pegawai
     public function index()
     {
-        $pegawai = Pegawai::all();
-        return view('pegawai.index', compact('pegawai'));
+        $pegawais = Pegawai::all();
+        return view('pegawai.index', compact('pegawais'));
     }
 
-    // ✅ Form tambah pegawai
     public function create()
     {
-        $pegawai = new Pegawai(); // biar form tidak error
-        return view('pegawai.create', compact('pegawai'));
+        return view('pegawai.create');
     }
 
-    // ✅ Simpan pegawai baru
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'nip' => 'required|string|max:255|unique:pegawai,nip',
-            'jabatan' => 'required|string|max:255',
-            'pangkat' => 'required|string|max:255',
+        $validated = $request->validate([
+            'nama' => 'required|string|max:100',
+            'nip' => 'required|unique:pegawais,nip',
+            'pangkat' => 'nullable|string|max:100',
+            'jabatan' => 'nullable|string|max:100',
         ]);
 
-        Pegawai::create($request->all());
+        Pegawai::create($validated);
 
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan.');
     }
 
-    // ✅ Edit pegawai
     public function edit($id)
     {
         $pegawai = Pegawai::findOrFail($id);
         return view('pegawai.edit', compact('pegawai'));
     }
 
-    // ✅ Update pegawai
     public function update(Request $request, $id)
     {
         $pegawai = Pegawai::findOrFail($id);
 
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'nip' => 'required|string|max:255|unique:pegawai,nip,' . $pegawai->id,
-            'jabatan' => 'required|string|max:255',
-            'pangkat' => 'required|string|max:255',
+        $validated = $request->validate([
+            'nama' => 'required|string|max:100',
+            'nip' => 'required|unique:pegawais,nip,' . $pegawai->id,
+            'pangkat' => 'nullable|string|max:100',
+            'jabatan' => 'nullable|string|max:100',
         ]);
 
-        $pegawai->update($request->all());
+        $pegawai->update($validated);
 
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diperbarui!');
+        return redirect()->route('pegawai.index')->with('success', 'Data pegawai berhasil diperbarui.');
     }
 
-    // ✅ Hapus pegawai
     public function destroy($id)
     {
         $pegawai = Pegawai::findOrFail($id);
         $pegawai->delete();
 
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus!');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus.');
     }
 }
