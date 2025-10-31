@@ -13,12 +13,13 @@ class Cuti extends Model
 
     // Sesuaikan fillable dengan kolom di database
     protected $fillable = [
-        'nama',
-        'jenis_cuti',
-        'alasan',
-        'tanggal_mulai',
-        'tanggal_kembali',
-    ];
+    'nama',
+    'jenis_cuti',
+    'alasan',
+    'tanggal_mulai',
+    'tanggal_kembali',
+    'status',
+];
 }
 
 

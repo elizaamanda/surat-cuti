@@ -30,14 +30,26 @@ Route::post('/pegawai/profile/update', [DashboardController::class, 'updateProfi
 // DATA PEGAWAI
 // =========================
 Route::resource('pegawai', PegawaiController::class)->except(['show']);
+Route::get('/pegawai/profile', [PegawaiController::class, 'profile'])->name('pegawai.profile');
+
+
 
 // =========================
-// CUTI
+// CUTI - ADMIN
 // =========================
 Route::resource('cuti', CutiController::class);
-Route::patch('/cuti/{id}/setujui', [CutiController::class, 'setujui'])->name('cuti.setujui');
-Route::patch('/cuti/{id}/tolak', [CutiController::class, 'tolak'])->name('cuti.tolak');
-Route::get('/cuti/kalender', [CutiController::class, 'kalender'])->name('cuti.kalender');
+Route::get('/cuti/admin', [CutiController::class, 'adminIndex'])->name('cuti.admin');
+Route::put('/cuti/{id}/setuju', [CutiController::class, 'setuju'])->name('cuti.setuju');
+Route::put('/cuti/{id}/tolak', [CutiController::class, 'tolak'])->name('cuti.tolak');
+
+// =========================
+// CUTI - PEGAWAI
+// =========================
+Route::get('/cuti/pegawai', [CutiController::class, 'pegawaiIndex'])->name('cuti.pegawai');
+Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
+Route::post('/cuti/store', [CutiController::class, 'store'])->name('cuti.store');
+Route::get('/cuti/{id}/print', [CutiController::class, 'print'])->name('cuti.print');
+
 
 // =========================
 // REKAP CUTI

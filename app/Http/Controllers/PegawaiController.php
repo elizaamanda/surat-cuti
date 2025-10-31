@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pegawai;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PegawaiController extends Controller
 {
@@ -53,6 +54,12 @@ class PegawaiController extends Controller
 
         return redirect()->route('pegawai.index')->with('success', 'Data pegawai berhasil diperbarui.');
     }
+
+public function profile()
+{
+    $user = Auth::user(); // Ambil data user yang sedang login
+    return view('pegawai.profile', compact('user'));
+}
 
     public function destroy($id)
     {

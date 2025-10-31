@@ -10,7 +10,7 @@
   <style>
     /* Body dan Background */
     body {
-      background: url('{{ asset("assets/images/logo 1.jpeg") }}') no-repeat center center fixed;
+      background: url('{{ asset("assets/images/6.jpeg") }}') no-repeat center center fixed;
       background-size: cover;
       margin: 0;
       height: 100vh;

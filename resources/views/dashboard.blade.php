@@ -19,7 +19,7 @@
     top: 0; left: 0;
     width: 200%;
     height: 100%;
-    background: url("{{ asset('assets/images/mist.png') }}") repeat-x;
+    background: url("{{ asset('assets/images/mist.jpeg') }}") repeat-x;
     opacity: 0.2;
     animation: moveMist 120s linear infinite;
     z-index: 0;
@@ -147,10 +147,7 @@
     <canvas id="cutiChart"></canvas>
   </div>
 
-  <img src="https://cdn.jsdelivr.net/gh/elyzaassets/muichiro-mini.png" alt="Muichiro" class="muichiro-mini">
-</div>
-
-<!-- Chart.js -->
+  
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   const ctx = document.getElementById('cutiChart').getContext('2d');
