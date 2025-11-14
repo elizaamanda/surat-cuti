@@ -11,17 +11,22 @@ class Cuti extends Model
 
     protected $table = 'cuti';
 
-    // Sesuaikan fillable dengan kolom di database
     protected $fillable = [
-    'nama',
-    'jenis_cuti',
-    'alasan',
-    'tanggal_mulai',
-    'tanggal_kembali',
-    'status',
-];
+        'user_id',
+        'nama',
+        'nip',
+        'jabatan',
+        'masa_kerja',
+        'jenis_cuti',
+        'alasan',
+        'tanggal_mulai',
+        'tanggal_kembali',
+        'status',
+    ];
+
+    // Relasi ke tabel pegawai
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class, 'user_id', 'user_id');
+    }
 }
-
-
-
-

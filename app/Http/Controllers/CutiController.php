@@ -62,11 +62,23 @@ class CutiController extends Controller
         return redirect()->route('cuti.index')->with('error', 'Cuti telah ditolak.');
     }
 
-    public function print($id)
-    {
-        $cuti = Cuti::findOrFail($id);
-        return view('cuti.print', compact('cuti'));
+   public function print($id)
+{
+    // Ambil data cuti + relasi ke tabel pegawai
+    $cuti = Cuti::with('pegawai')->findOrFail($id);
+
+    // Jika kolom NIP di tabel cuti kosong, ambil dari tabel pegawai
+    if (empty($cuti->nip) && $cuti->pegawai) {
+        $cuti->nip = $cuti->pegawai->nip;
     }
+
+    // Jika kolom nama juga kosong, ambil dari pegawai
+    if (empty($cuti->nama) && $cuti->pegawai) {
+        $cuti->nama = $cuti->pegawai->nama;
+    }
+
+    return view('cuti.print', compact('cuti'));
+}
 
     public function rekap()
     {
@@ -123,14 +135,26 @@ class CutiController extends Controller
     }
 
     public function destroy($id)
-    {
-        $cuti = Cuti::where('nama', Auth::user()->nama)->findOrFail($id);
+{
+    $query = Cuti::query();
 
-        if ($cuti->status !== 'Menunggu') {
-            return redirect()->route('cuti.index')->with('error', 'Cuti yang sudah diproses tidak bisa dihapus.');
-        }
-
-        $cuti->delete();
-        return redirect()->route('cuti.index')->with('success', 'Pengajuan cuti berhasil dihapus.');
+    // Kalau user adalah pegawai, batasi penghapusan ke nama sendiri
+    if (Auth::user()->role === 'pegawai') {
+        $query->where('nama', Auth::user()->nama);
+        // Pegawai hanya bisa hapus jika status masih menunggu
+        $query->where('status', 'Menunggu');
     }
+
+    $cuti = $query->findOrFail($id);
+
+    // Kalau admin, lewati pengecekan status
+    if (Auth::user()->role !== 'admin' && $cuti->status !== 'Menunggu') {
+        return redirect()->route('cuti.index')->with('error', 'Cuti yang sudah diproses tidak bisa dihapus.');
+    }
+
+    $cuti->delete();
+    return redirect()->route('cuti.index')->with('success', 'Pengajuan cuti berhasil dihapus.');
+}
+
+
 }

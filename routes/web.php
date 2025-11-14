@@ -41,6 +41,7 @@ Route::resource('cuti', CutiController::class);
 Route::get('/cuti/admin', [CutiController::class, 'adminIndex'])->name('cuti.admin');
 Route::put('/cuti/{id}/setuju', [CutiController::class, 'setuju'])->name('cuti.setuju');
 Route::put('/cuti/{id}/tolak', [CutiController::class, 'tolak'])->name('cuti.tolak');
+Route::delete('/cuti/{id}/destroy', [CutiController::class, 'destroy'])->name('admin.cuti.destroy');
 
 // =========================
 // CUTI - PEGAWAI

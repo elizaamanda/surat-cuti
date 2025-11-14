@@ -57,8 +57,8 @@ class PegawaiController extends Controller
 
 public function profile()
 {
-    $user = Auth::user(); // Ambil data user yang sedang login
-    return view('pegawai.profile', compact('user'));
+    $pegawai = Pegawai::where('user_id', Auth::id())->first();
+    return view('pegawai.profile', compact('pegawai'));
 }
 
     public function destroy($id)
